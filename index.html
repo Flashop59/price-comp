@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Machine Price Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      background: #f9f9f9;
+    }
+    h2 {
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    select, input[type=range] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      font-size: 16px;
+    }
+    .output {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+    }
+    .price-label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Machine Price Calculator</h2>
+
+  <label for="machineType">Select Machine Type:</label>
+  <select id="machineType">
+    <option value="1">1 Battery (₹2,00,000)</option>
+    <option value="2">2 Batteries (₹2,50,000)</option>
+    <option value="3">3 Batteries (₹2,90,000)</option>
+  </select>
+
+  <div class="output">
+    <div><span class="price-label">Base Price:</span> ₹<span id="basePrice">200000</span></div>
+  </div>
+
+  <label for="discountRange">Discount (%): <span id="discountPercent">0</span>%</label>
+  <input type="range" id="discountRange" min="0" max="100" value="0" />
+
+  <div class="output">
+    <div><span class="price-label">Price After Discount:</span> ₹<span id="discountedPrice">200000</span></div>
+    <div><span class="price-label">Final Price (incl. 12% GST):</span> ₹<span id="finalPrice">224000</span></div>
+  </div>
+
+  <script>
+    const machineType = document.getElementById("machineType");
+    const basePriceSpan = document.getElementById("basePrice");
+    const discountRange = document.getElementById("discountRange");
+    const discountPercent = document.getElementById("discountPercent");
+    const discountedPriceSpan = document.getElementById("discountedPrice");
+    const finalPriceSpan = document.getElementById("finalPrice");
+
+    const prices = {
+      "1": 200000,
+      "2": 250000,
+      "3": 290000
+    };
+
+    function updatePrices() {
+      const selected = machineType.value;
+      const basePrice = prices[selected];
+      const discount = parseInt(discountRange.value);
+
+      const discountedPrice = basePrice - (basePrice * discount / 100);
+      const finalPrice = discountedPrice + (discountedPrice * 0.12);
+
+      basePriceSpan.textContent = basePrice.toLocaleString();
+      discountPercent.textContent = discount;
+      discountedPriceSpan.textContent = Math.round(discountedPrice).toLocaleString();
+      finalPriceSpan.textContent = Math.round(finalPrice).toLocaleString();
+    }
+
+    machineType.addEventListener("change", updatePrices);
+    discountRange.addEventListener("input", updatePrices);
+
+    // Initialize
+    updatePrices();
+  </script>
+
+</body>
+</html>
