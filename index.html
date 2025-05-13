@@ -6,47 +6,69 @@
   <title>Machine Price Calculator</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #ccffcc;
       padding: 30px;
       max-width: 600px;
       margin: auto;
-      background: #f9f9f9;
     }
+
     h2 {
-      color: #333;
+      color: #00ff88;
+      text-align: center;
+      margin-bottom: 30px;
     }
+
     label {
       display: block;
       margin-top: 20px;
       font-weight: bold;
+      color: #80ffbf;
     }
+
     select, input[type=range] {
       width: 100%;
       padding: 10px;
-      margin-top: 8px;
       font-size: 16px;
+      margin-top: 8px;
+      border: 1px solid #00ff88;
+      background-color: #1a1a1a;
+      color: #ccffcc;
+      border-radius: 5px;
     }
+
     .output {
-      background: #fff;
+      background: #1a1a1a;
       padding: 15px;
-      border-radius: 8px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-top: 15px;
+      border: 1px solid #00ff88;
     }
+
     .price-label {
       font-weight: bold;
+      color: #66ffcc;
+    }
+
+    #discountPercent {
+      color: #00ffaa;
+    }
+
+    span {
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
 
-  <h2>Machine Price Calculator</h2>
+  <h2>💰 Machine Price Calculator</h2>
 
   <label for="machineType">Select Machine Type:</label>
   <select id="machineType">
-    <option value="1">1 Battery (₹2,00,000)</option>
-    <option value="2">2 Batteries (₹2,50,000)</option>
-    <option value="3">3 Batteries (₹2,90,000)</option>
+    <option value="1">1 Battery – ₹2,00,000</option>
+    <option value="2">2 Batteries – ₹2,50,000</option>
+    <option value="3">3 Batteries – ₹2,90,000</option>
   </select>
 
   <div class="output">
@@ -92,7 +114,7 @@
     machineType.addEventListener("change", updatePrices);
     discountRange.addEventListener("input", updatePrices);
 
-    // Initialize
+    // Initial load
     updatePrices();
   </script>
 
